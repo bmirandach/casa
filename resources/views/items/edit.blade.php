@@ -5,21 +5,25 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<br>
-			<h3>Editar</h3>
+			<h3>Editar stock de {{ $stock->item->nombre }}</h3>
 
 				{{ Form::model($stock, ['route' => ['stock.update', $stock->id], 'method' => 'PATCH']) }}
 
 				{{ csrf_field() }}
 		
-				<h4>Stock disponible</h4>
-				<span class="input-number-decrement" onclick="disminuye('cantidad')" name="cantidad">–</span><input id="cantidad" size="3" class="input-number" maxlength="2" type="text" value="{{$stock->stock}}"><span class="input-number-increment" onclick="aumenta('cantidad')">+</span>
-				<br><br>
-				<h4>Stock ideal</h4>
-				<span class="input-number-decrement" onclick="disminuye('ideal')" name="ideal">–</span><input id="ideal" size="3" class="input-number" maxlength="2" type="text" value="{{$stock->cantidad_ideal}}"><span class="input-number-increment" onclick="aumenta('ideal')">+</span>
-				<br><br>
-				<div class="col-sm-4">
+				<h4>Disponible</h4>
+				<div class="form-group">
+				<span class="input-number-decrement" onclick="disminuye('cantidad')" >–</span><input id="cantidad" name="cantidad" size="3" class="input-number" maxlength="2" type="text" value="{{$stock->stock}}"><span class="input-number-increment" onclick="aumenta('cantidad')">+</span>
+				</div>
+				<h4>Ideal</h4>
+				<div class="form-group">
+				<span class="input-number-decrement" onclick="disminuye('ideal')">–</span><input id="ideal" name="ideal"size="3" class="input-number" maxlength="2" type="text" value="{{$stock->cantidad_ideal}}"><span class="input-number-increment" onclick="aumenta('ideal')">+</span>
+				</div>
+				<div class="form-group">
           			<button type="submit" class="btn btn-sm btn-success">Editar</button>
       			</div>
+      			<br>
+      			@include('layouts.errors')
       		{{ Form::close() }}
 			
 		</div>

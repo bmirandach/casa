@@ -85,7 +85,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="{{ route('home') }}">{{ __('Listas') }}</a>
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                             </li>
 
                             <li class="nav-item dropdown">

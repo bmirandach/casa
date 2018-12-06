@@ -27,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function house() {
+        return $this->belongsTo(House::class, 'casa');
+    }
+
+    public function stock() {
+        return $this->hasMany('App\Stock','usuario_modifica','id');
+    }
 }

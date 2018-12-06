@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Item;
-use DB;
+use App\User;
 use App\Category;
 use App\Stock;
+use DB;
+use Auth;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -60,12 +62,12 @@ class ItemController extends Controller
         foreach ($id_it as $key) {
             $stock->id_item = $key->id;
         }
-        $stock->id_house = 1;
+        $stock->id_house = Auth::user()->casa;
         $stock->stock = 0;
         $stock->volumen = null;
         $stock->unidad = null;
         $stock->cantidad_ideal = 0;
-        $stock->usuario_modifica = 2;
+        $stock->usuario_modifica = Auth::user()->id;
         $stock->save();
 
 

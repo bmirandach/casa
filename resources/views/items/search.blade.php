@@ -9,12 +9,12 @@
 
   <form>
 
-    <select>
+    <!--<select>
       <option value="0"> Categorias </option>
       @foreach($categories as $category)
           <option value="{{$category->id}}"> {{$category->nombre}} </option>
         @endforeach
-    </select>
+    </select>-->
     <input id="elNombre" type="text" placeholder="nombre del producto...">
     <br><br>
     
@@ -40,9 +40,9 @@
   </form>
   <br>
 
-  <h1>No disponibles</h1>
+  <h1>Sin stock</h1>
   <form>
-    <input id="elNombreB" type="text" placeholder="nombre del item...">
+    <input id="elNombreB" type="text" placeholder="nombre del producto...">
     <br><br>
     <table>
       <thead>
@@ -63,5 +63,7 @@
       </tbody>
     </table>
   </form>
+  <p>¿El producto no está? <a href="/crear">Agregalo </a></p>
+
 </div>
 @endsection

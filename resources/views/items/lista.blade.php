@@ -8,9 +8,9 @@
     <ul>
 
       @foreach($stocks as $stock)
-      @if($stock->stock == $stock->cantidad_ideal)
-        <li class="draggable" draggable="true"><a href="/items/{{$stock->item->id}}">{{$stock->item->nombre}}</a></li>
-      @endif
+        @if($stock->stock == $stock->cantidad_ideal)
+          <li class="draggable" draggable="true"><a href="/items/{{$stock->id}}/editar">{{$stock->item->nombre}}</a></li>
+        @endif
       @endforeach
 
     </ul>
@@ -18,18 +18,19 @@
   <div class="compras">
     <h2>Lista de compras</h2>
     <div class="adder">
-      <input type="text" class="input" placeholder="Añade items a la lista"/>
+      <input type="text" class="input" placeholder="Añade items a la lista"/> 
       <span class="add">+</span>
     </div>
     <ul id="lista">
       @foreach($stocks as $stock)
         @if($stock->stock < $stock->cantidad_ideal)
-          <li class="draggable" draggable="true"><a href="/items/{{$stock->item->id}}">{{$stock->item->nombre}}</a></li>
+          <li class="draggable" draggable="true"><a href="/items/{{$stock->id}}/editar">{{$stock->item->nombre}}</a></li>
         @endif
       @endforeach
     </ul>
   </div>
 </div>
+
 <script src="{{ asset('js/casa.js') }}" defer></script>
 
 @endsection

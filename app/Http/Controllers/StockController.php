@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Stock;
 use App\Category;
 use App\Item;
+use App\User;
 use DB;
+use Auth;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -17,30 +19,8 @@ class StockController extends Controller
      */
     public function index()
     {
-       /* $twest = DB::table('stocks')->where('stock','=', 'cantidad_ideal')->get()->pluck('id_item')->toArray();
-              
-dd($twest); */     
-        /*$items = DB::table('items')
-                    ->join('stocks', function ($join) {
-                        $join->on('items.id', '=', 'stocks.id_item')
-                             ->whereRaw('stocks.stock = stocks.cantidad_ideal');
-                    })
-                    ->get();*/
-
-/*dd($items);*/
-        //$items = Offering::where('cantidad_ideal', '<', 'stock')->get()->pluck('nombre')
-        //$stock = DB::table('stocks')->where('stock', '<', 'cantidad_ideal')->get()->pluck('nombre')->toArray();
-        /*$stockes = DB::table('items')
-                    ->join('stocks', function ($join) {
-                        $join->on('items.id', '=', 'stocks.id_item')
-                             ->whereRaw('stocks.stock < stocks.cantidad_ideal');
-                    })
-                    ->get();*/
-
-
         $stocks = Stock::all();
         return view('items.lista', compact('stocks'));
-        //
     }
 
     public function tableshow()
@@ -48,37 +28,6 @@ dd($twest); */
         $categories = Category::all();
         $items = Stock::all();
 
-        //dd($items->category());
-        /*$subquery = DB::table('categories')
-                        ->select('id', 'nombre as categ_nombre');
-*/
-      //  $stock = DB::table('items')
-                    /*->joinSub($subquery, 'categorias', function($join) {
-                        $join->on('items.categoria', '=', 'categorias.id');
-                    })*/
-        /*            ->join('categories', 'items.categoria', '=', 'categories.id')
-
-                    ->join('stocks', function($join) {
-                        $join->on('items.id', '=', 'stocks.id_item')
-                        ->where('stock', '<>', 0);
-                    })
-                    ->select('items.id, categories.nombre, items.nombre')
-                    ->get();
-
-        $no_stock = DB::table('items')
-                    //->joinSub($subquery, 'categorias', function($join) {
-                      //  $join->on('items.categoria', '=', 'categorias.id');
-                   // })
-                    ->join('categories', 'items.categoria', '=', 'categories.id')
-
-                    ->join('stocks', function($join) {
-                        $join->on('items.id', '=', 'stocks.id_item')
-                        ->where('stock', '=', 0);
-                    })
-                    ->select('items.id, categories.nombre, items.nombre')
-                    ->get();
-
-*/
         return view('items.search', compact('items', 'categories'));
     }
 
@@ -134,20 +83,18 @@ dd($twest); */
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { //Stock $stock
+    { 
         $this->validate(request(), [
           'cantidad' => 'required',
           'ideal' => 'required',
-
         ]);
-        dd($id);
 
         $stock = Stock::find($id);
-    //$stock->update($request->all());
         $stock->stock = $request->get('cantidad');
         $stock->cantidad_ideal = $request->get('ideal');
+        $stock->id_house = Auth::user()->casa;
+        $stock->usuario_modifica = Auth::user()->id;
         $stock->save();
-        dd($stock->cantidad_ideal);
 
         return redirect()->route('search');
 

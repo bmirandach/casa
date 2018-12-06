@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//sacar /listas
-Route::get('/listas', 'StockController@index')->name('listas');
-
-
 Route::resource('stock', 'StockController');
 
 Route::get('/items/{item}', 'ItemController@show');

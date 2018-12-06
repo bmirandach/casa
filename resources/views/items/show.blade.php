@@ -6,9 +6,6 @@
         <div class="col-sm-6">
 			<h1> {{$item->nombre}} </h1>
 
-			<!--<a href="">editar stock ideal</a>
-			{{$item->id}}  y lo que esta en el text del editar
-			-->
 			<h4>Stock disponible: {{$item->stock->stock}}</h4>
 
 			<h4>Stock ideal: {{$item->stock->cantidad_ideal}}</h4>

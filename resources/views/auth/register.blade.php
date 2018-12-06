@@ -30,7 +30,7 @@
                             <!--<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>-->
 
                             <div class="col-md-6">
-                                <input id="casa" type="text" placeholder="Código de la casa" class="form-control{{ $errors->has('casa') ? ' is-invalid' : '' }}" name="casa" value="{{ old('casa') }}" required>
+                                <input id="casa" type="text" placeholder="Id de la casa" class="form-control{{ $errors->has('casa') ? ' is-invalid' : '' }}" name="casa" value="{{ old('casa') }}" required>
 
                                 @if ($errors->has('casa'))
                                     <span class="invalid-feedback" role="alert">
